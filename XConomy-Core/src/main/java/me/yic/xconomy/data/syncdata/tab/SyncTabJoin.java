@@ -45,16 +45,10 @@ public class SyncTabJoin extends SyncData {
     @Override
     public void SyncStart() {
         if (allname == null) {
-            if (!AdapterManager.Tab_PlayerList.contains(name)) {
-                AdapterManager.Tab_PlayerList.add(name);
-            }
+            AdapterManager.add_Tab_PlayerList(name);
         }else{
             for (String pn : allname){
-                if (!AdapterManager.Tab_PlayerList.contains(pn)) {
-                    if (pn != null) {
-                        AdapterManager.Tab_PlayerList.add(pn);
-                    }
-                }
+                AdapterManager.add_Tab_PlayerList(pn);
             }
         }
     }

@@ -24,6 +24,7 @@ import me.yic.xconomy.adapter.comp.CPlayer;
 import me.yic.xconomy.data.DataCon;
 import me.yic.xconomy.data.DataLink;
 import me.yic.xconomy.data.syncdata.tab.SyncTabJoin;
+import me.yic.xconomy.info.HiddenINFO;
 
 public class PlayerConnection{
 
@@ -35,11 +36,17 @@ public class PlayerConnection{
             DataLink.newPlayer(player);
         }
 
-        if (XConomyLoad.getSyncData_Enable()) {
-            DataCon.SendMessTask(new SyncTabJoin(player.getName()));
-        }
-        if (!AdapterManager.Tab_PlayerList.contains(player.getName())) {
-            AdapterManager.Tab_PlayerList.add(player.getName());
+        if (player.hasPermission("xconomy.admin.hidden")){
+            AdapterManager.remove_Tab_PlayerList(player.getName());
+            HiddenINFO.addHidden(player.getName());
+        }else {
+            if (XConomyLoad.getSyncData_Enable()) {
+                DataCon.SendMessTask(new SyncTabJoin(player.getName()));
+            }
+
+            if (!AdapterManager.get_Tab_PlayerList().contains(player.getName())) {
+                AdapterManager.add_Tab_PlayerList(player.getName());
+            }
         }
 
         if (XConomyLoad.DConfig.isMySQL() && XConomyLoad.Config.PAY_TIPS) {
