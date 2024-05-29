@@ -26,11 +26,12 @@ import me.yic.xconomy.info.SyncChannalType;
 import me.yic.xconomy.lang.MessagesManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AdapterManager {
 
-    private static final List<String> Tab_PlayerList = new ArrayList<>();
+    private static final List<String> Tab_PlayerList = Collections.synchronizedList(new ArrayList<>());
     public static boolean foundvaultpe = false;
     public static boolean foundvaultOfflinePermManager = false;
 
